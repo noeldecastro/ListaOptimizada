@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { themes } from "./src/constants/themes/index";
-import { List, Modal } from "./src/components/index";
+import { List, ModalDelete } from "./src/components/index";
 
 
 export default function App() {
@@ -63,7 +63,7 @@ export default function App() {
         tasks={tasks}
         onPressItem={handleModal}
       />
-      <Modal
+      <ModalDelete
         animationType="slide"
         visible={modalVisible}
         onRequestClose={() => null}
@@ -83,7 +83,7 @@ export default function App() {
 
           <Button title="Okay" onPress={() => onHandleDelete(itemSelected)} />
         </View>
-      </Modal>
+      </ModalDelete>
     </View>
   );
 }
