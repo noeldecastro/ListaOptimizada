@@ -2,6 +2,6 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     containerList: {
-        marginHorizontal: 30,
+        marginHorizontal: 25,
       },
 });

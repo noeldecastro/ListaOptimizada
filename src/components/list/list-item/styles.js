@@ -8,12 +8,22 @@ export const styles = StyleSheet.create({
         borderRadius:20,
         justifyContent: "flex-start",
         marginVertical: 8,
+        shadowColor: "#000",
+        marginHorizontal:5,
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 2.22,
+        
+        elevation: 3,
       },
       containerItem: {
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "center",
-        maxWidth:260,
+        width:260,
         flexWrap: "wrap",
       },
       item: {
@@ -40,6 +50,7 @@ export const styles = StyleSheet.create({
         borderWidth:1,
         backgroundColor: "#ffffff",
         width:20,
+        height:20,
         marginLeft:15,
         borderRadius: 5,
       },
