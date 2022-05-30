@@ -7,7 +7,7 @@ import { styles } from './styles';
 export const List = ({ tasks, onPressItem  }) => {
 
     const ListHeaderComponent = () => {
-        return tasks.length > 0 && <ListHeader title='Task List' />;
+        return tasks.length > 0 && <ListHeader title='Todas' />;
     };
 
     const renderItem = ({ item }) => <ListItem item={item} onPressItem={onPressItem} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -17,6 +17,16 @@ export default function App() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalAddVisible, setModalAddVisible] = useState(false);
   const [itemSelected, setItemSelected] = useState({});
+  const [currentDate, setCurrentDate] = useState('');
+ 
+  useEffect(() => {
+    var date = new Date().getDate(); //Current Date
+    var month = new Date().getMonth() + 1; //Current Month
+    var year = new Date().getFullYear(); //Current Year
+    setCurrentDate(
+      date + '/' + month + '/' + year 
+    );
+  }, []);
 
   const onHandleInput = (text) => {
     setTask(text);
@@ -52,7 +62,7 @@ export default function App() {
     <View style={themes.container}>
       <View style={styles.header}>
         <View style={styles.containerTitulo}>
-          <Text style={styles.Fecha}>Fecha</Text>
+          <Text style={styles.Fecha}>{currentDate}</Text>
           <Text style={styles.titulo}>Tasks</Text>
         </View>
         <View style={styles.containerUsuario}>
@@ -85,10 +95,15 @@ export default function App() {
               <Text style={styles.deleteButtonText}>X</Text>
             </TouchableOpacity>
           </View>
-          <Text style={styles.modalText}>Are you sure?</Text>
-          <Text style={styles.modalMessage}>{itemSelected.value}</Text>
-
-          <Button title="Okay" onPress={() => onHandleDelete(itemSelected)} />
+          <Text style={styles.modalText}>¿Desea eliminar esta tarea?</Text>
+          <View style={styles.containerItem}>
+            <Text style={styles.modalMessage}>{itemSelected.value}</Text>
+          </View>
+          <TouchableOpacity
+          onPress={() => onHandleDelete(itemSelected)}
+          style={styles.CreateButton}>
+              <Text style={styles.CreateButtonText}>Eliminar</Text>
+          </TouchableOpacity>
         </View>
       </ModalDelete>
       <ModalAdd
@@ -98,7 +113,7 @@ export default function App() {
         >
         <View style={styles.modalContent}>
           <View style={styles.modalTitleContainer}>
-            <Text style={styles.modalTitle}>Crear nueva tarea</Text>
+            <Text style={styles.modalTitle}>Crear tarea</Text>
             <TouchableOpacity
               style={styles.deleteButton}
               onPress={() => setModalAddVisible(!modalAddVisible)}
@@ -108,16 +123,17 @@ export default function App() {
           </View>
           <TextInput
             style={styles.textInput}
-            placeholder="add new task"
+            placeholderTextColor="#ffffff"
+            placeholder="Escriba aca"
             value={task}
             onChangeText={onHandleInput}
           />
-          <Button
-            title="ADD"
-            color="#8CBCB9"
-            onPress={() => onHandleSubmit()}
-            disabled={task.length === 0}
-          />
+          <TouchableOpacity
+          onPress={() => onHandleSubmit()}
+          disabled={task.length === 0}
+          style={styles.CreateButton}>
+              <Text style={styles.CreateButtonText}>+ Crear tarea</Text>
+          </TouchableOpacity>
         </View>
       </ModalAdd>
     </View>
@@ -190,18 +206,42 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginVertical: 20,
-    marginHorizontal: 20,
-    color:"#ffffff"
+    marginLeft:80,
+    color:"#ffffff",
+    alignSelf: "center",
   },
   modalText: {
     fontSize: 16,
     marginVertical: 10,
+    color:"#ffffff",
+    alignSelf: "center",
   },
   modalMessage: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "bold",
     marginVertical: 10,
+    color: "#000000",
   },
+
+  containerItem:{
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(255,255,255,0.5)",
+    borderRadius:20,
+    marginHorizontal:40,
+    justifyContent: "center",
+    marginVertical: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    
+    elevation: 3,
+  },
+
   addTaskButton:{
     marginVertical:60,
     backgroundColor:"#28447E",
@@ -228,6 +268,27 @@ const styles = StyleSheet.create({
   },
   deleteButtonText:{
     color:"#ffffff",
+  },
+  CreateButton:{
+    marginVertical:50,
+    backgroundColor:"#ffffff",
+    borderRadius:15,
+    shadowColor: "#000",
+    width:180,
+    alignItems:"center",
+    marginHorizontal:120,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    
+    elevation: 11,
+  },
+  CreateButtonText:{
+    color:"#28447E",
+    margin: 15,
   },
 });
 
