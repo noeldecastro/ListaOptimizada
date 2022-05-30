@@ -1,6 +1,5 @@
 import React from "react";
-
-import { Modal } from "react-native";
+import { Modal, View } from "react-native";
 
 
 const CustomModal = ({ children, visible, onRequestClose, animationType }) => {
@@ -9,9 +8,9 @@ const CustomModal = ({ children, visible, onRequestClose, animationType }) => {
         animationType={animationType}
         visible={visible}
         onRequestClose={() => onRequestClose()}
-      >
+        >
         {children}
-      </Modal>
+        </Modal>
     )
 }
 
